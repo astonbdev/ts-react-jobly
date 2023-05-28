@@ -23,24 +23,25 @@ class JoblyApi {
             "Content-Type": "application/json"
         };
 
+        //URLSearchParams constructs key val pairs for us, then we make it a
+        //string to add to our URL instance.
         url.search = method === "get"
             ? url.search = new URLSearchParams(data).toString()
             : url.search = "";
 
+        // set to undefined since the body property cannot exist on a get method
         const body = method !== "get"
             ? JSON.stringify(data)
-            : undefined
+            : undefined;
 
-
+        //fetch API does not throw an error, have to dig into the resp for msgs
         const resp = await fetch(url, { method, body, headers });
 
         if (!resp.ok) {
             console.log("Error", resp);
             console.error("API Error:", resp.statusText, resp.status);
-            // const jsonResp = await resp.json()
-            // console.log("jsonresp", jsonResp)
-            // let message = `API Error: ${resp.statusText} ${resp.status}`;
-            // throw Array.isArray(message) ? message : [message];
+            //TODO: Add error handling and throw something here.
+            return;
         }
 
         return await resp.json()
@@ -51,55 +52,55 @@ class JoblyApi {
 
     /** Get the current user. */
 
-    static async getCurrentUser(username) {
+    static async getCurrentUser(username: string) {
         let res = await this.request(`users/${username}`);
         return res.user;
     }
 
     /** Get companies (filtered by name if not undefined) */
 
-    static async getCompanies(filters) {
+    static async getCompanies(filters: ICompanyFilters): Promise<ICompany[]> {
         let res = await this.request("companies", filters);
         return res.companies;
     }
 
     /** Get details on a company by handle. */
 
-    static async getCompany(handle) {
+    static async getCompany(handle: string) {
         let res = await this.request(`companies/${handle}`);
         return res.company;
     }
 
     /** Get list of jobs (filtered by title if not undefined) */
 
-    static async getJobs(title) {
+    static async getJobs(title: string) {
         let res = await this.request("jobs", { title });
         return res.jobs;
     }
 
     /** Apply to a job */
 
-    static async applyToJob(username, id) {
+    static async applyToJob(username: string, id: number) {
         await this.request(`users/${username}/jobs/${id}`, {}, "post");
     }
 
     /** Get token for login from username, password. */
 
-    static async login(data) {
+    static async login(data: ILogin) {
         let res = await this.request(`auth/token`, data, "post");
         return res.token;
     }
 
     /** Signup for site. */
 
-    static async signup(data) {
+    static async signup(data: IRegister) {
         let res = await this.request(`auth/register`, data, "post");
         return res.token;
     }
 
     /** Save user profile page. */
 
-    static async saveProfile(username, data) {
+    static async saveProfile(username: string, data: IUserUpdate) {
         let res = await this.request(`users/${username}`, data, "patch");
         return res.user;
     }
