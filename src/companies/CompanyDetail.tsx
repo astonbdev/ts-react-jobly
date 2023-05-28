@@ -1,9 +1,9 @@
 import {useState, useEffect} from 'react';
 import { useParams } from "react-router-dom";
 import CompanyCard from './CompanyCard';
-import ErrorCard from './Error'
-import JoblyApi from './api';
-import JobsList from './JobsList';
+import ErrorCard from '../helpers/Error'
+import JoblyApi from '../helpers/api';
+import JobsList from '../jobs/JobsList';
 
 /**
  * Logical Component for Company App displaying single Company.

@@ -1,7 +1,7 @@
 import {Routes, Route} from 'react-router-dom';
-import Companies from './Companies';
-import CompanyDetail from './CompanyDetail';
-import Jobs from './Jobs'
+import Companies from './companies/Companies';
+import CompanyDetail from './companies/CompanyDetail';
+import Jobs from './jobs/Jobs'
 
 /**
  * Router for Jobly App

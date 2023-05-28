@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import CompaniesList from "./CompaniesList";
-import JoblyApi from "./api";
+import JoblyApi from "../helpers/api";
 
 /**
  * Logical Component for Company App and child components

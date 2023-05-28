@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import JobsList from "./JobsList";
-import JoblyApi from "./api";
+import JoblyApi from "../helpers/api";
 
 
 /**

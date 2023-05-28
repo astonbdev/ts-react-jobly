@@ -1,5 +1,5 @@
 import './App.css';
-import JoblyApi from './api.ts';
+import JoblyApi from './helpers/api.ts';
 import { BrowserRouter } from 'react-router-dom';
 import RoutesList from './RoutesList.tsx';
 
