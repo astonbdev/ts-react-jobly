@@ -4,6 +4,7 @@ import CompanyDetail from './companies/CompanyDetail';
 import Jobs from './jobs/Jobs'
 import LoginForm from './auth/LoginForm';
 import SignupForm from './auth/SignUpForm';
+import UserUpdateForm from './users/UserUpdateForm'
 
 /**
  * Router for Jobly App
@@ -20,6 +21,7 @@ function RoutesList({login, signup}: {login:LoginFunc, signup: SignupFunc}){
             <Route path="/signup" element={<SignupForm signup={signup}/>}/>
             <Route path="/companies" element={<Companies/>}/>
             <Route path="/companies/:handle" element={<CompanyDetail/>}/>
+            <Route path="/profile" element={<UserUpdateForm />}/>
             <Route path="/jobs" element={<Jobs/>}/>
         </Routes>
     )

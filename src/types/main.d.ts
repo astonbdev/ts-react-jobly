@@ -45,6 +45,7 @@ interface IUser {
     username: string,
     firstName: string,
     lastName: string,
+    email: string,
     isAdmin: boolean,
     jobs: IJob[]
 }
@@ -56,7 +57,7 @@ interface IUserUpdate {
 }
 interface IUserContext {
     currentUser?: IUser | null,
-    setUser?: React.Dispatch<SetStateAction<{ data: IUser, isLoading: boolean } | null>>
+    setUser?: SetUserFunc
 }
 
 /** ERROR */
@@ -72,3 +73,4 @@ type InputElements = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 //Function Types
 type LoginFunc = (credentials: ILogin) => void;
 type SignupFunc = (credentials: IRegister) => void;
+type SetUserFunc = React.Dispatch<SetStateAction<{ data: IUser, isLoading: boolean } | null>>
