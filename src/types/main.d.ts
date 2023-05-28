@@ -54,6 +54,10 @@ interface IUserUpdate {
     lastName?: string,
     email?: string
 }
+interface IUserContext {
+    currentUser?: IUser | null,
+    setUser?: React.Dispatch<SetStateAction<{ data: IUser, isLoading: boolean } | null>>
+}
 
 /** ERROR */
 

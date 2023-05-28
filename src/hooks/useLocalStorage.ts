@@ -17,7 +17,11 @@ import { useState, useEffect } from "react";
  * Author: Joel Burton
  */
 
-function useLocalStorage(key: string, firstValue = null) {
+//FIXME: What is the best pattern to format this?
+function useLocalStorage(
+    key: string,
+    firstValue = null)
+    : [string | null, React.Dispatch<React.SetStateAction<string | null>>] {
     const initialValue = localStorage.getItem(key) || firstValue;
 
     const [item, setItem] = useState(initialValue);
