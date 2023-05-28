@@ -1,5 +1,16 @@
 import CompanyCard from './CompanyCard'
 
+/**
+ * Company Card generator component
+ * 
+ * props: companies-
+ *          [{handle, name, description, numEmployees, logoUrl}...]
+ * 
+ * state: null
+ * 
+ * Companies -> CompanyList -> CompanyCard
+ * 
+ */
 function CompaniesList({ companies }: {companies: ICompany[]}){
     return(
         <>

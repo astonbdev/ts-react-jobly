@@ -3,9 +3,12 @@ import CompaniesList from "./CompaniesList";
 import JoblyApi from "./api";
 
 /**
- * props:
+ * Logical Component for Company App and child components
  * 
- * state:
+ * props: null
+ * 
+ * state: companies-
+ *          [{handle, name, description, numEmployees, logoUrl}...]
  * 
  * Routes -> {Jobs, Companies}
  * 

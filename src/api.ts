@@ -28,6 +28,7 @@ class JoblyApi {
         url.search = method === "get"
             ? url.search = new URLSearchParams(data).toString()
             : url.search = "";
+        console.log(url.search);
 
         // set to undefined since the body property cannot exist on a get method
         const body = method !== "get"
@@ -36,6 +37,7 @@ class JoblyApi {
 
         //fetch API does not throw an error, have to dig into the resp for msgs
         const resp = await fetch(url, { method, body, headers });
+        console.log("fetch resp", resp);
 
         if (!resp.ok) {
             console.log("Error", resp);
@@ -73,8 +75,10 @@ class JoblyApi {
 
     /** Get list of jobs (filtered by title if not undefined) */
 
-    static async getJobs(title: string) {
-        let res = await this.request("jobs", { title });
+    static async getJobs(title: undefined | string = undefined): Promise<IJob[]> {
+        const filter = title ? { title } : undefined;
+
+        const res = await this.request("jobs", filter);
         return res.jobs;
     }
 

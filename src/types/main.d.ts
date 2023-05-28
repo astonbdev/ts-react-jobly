@@ -27,6 +27,15 @@ interface ICompanyFilters {
     maxEmployees?: number
 }
 
+/** JOBS */
+interface IJob {
+    id: number,
+    title: string,
+    salary: number,
+    equity: string,
+    companyHandle: string
+}
+
 /** USER */
 interface IUserUpdate {
     password?: string,

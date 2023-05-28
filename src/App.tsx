@@ -1,16 +1,22 @@
 import './App.css';
 import JoblyApi from './api.ts';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Companies from './Companies.tsx';
+import { BrowserRouter } from 'react-router-dom';
+import RoutesList from './RoutesList.tsx';
 
+/**
+ * props:
+ * 
+ * state:
+ * 
+ * App -> RoutesList
+ * 
+ */
 function App() {
 
   return (
     <>
       <BrowserRouter>
-        <Routes>
-          <Route path="/companies" element={<Companies/>}/>
-        </Routes>
+        <RoutesList />
       </BrowserRouter>
     </>
   );
