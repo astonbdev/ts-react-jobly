@@ -1,5 +1,6 @@
 /**
  * Pres component for a Job
+ * 
  * props: job-
  *          { id, title, salary, equity, companyHandle }
  * 

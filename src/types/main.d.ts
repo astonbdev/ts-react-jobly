@@ -54,3 +54,10 @@ interface IErrorAPI {
     message: string,
     status: number
 }
+
+//Helpers
+type InputElements = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+
+//Function Types
+type LoginFunc = (credentials: ILogin) => void;
+type SignupFunc = (credentials: IRegister) => void;

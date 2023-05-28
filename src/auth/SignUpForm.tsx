@@ -1,0 +1,133 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import ErrorCard from '../helpers/Error'
+
+/** Signup form.
+ *
+ * Shows form and manages update to state on changes.
+ * On submission:
+ * - calls signup function prop
+ *
+ * Routes -> SignupForm -> Alert
+ * Routed as /signup
+ */
+
+const initialFormData = {
+    username: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+  }
+
+function SignupForm({ signup }: {signup: SignupFunc}) {
+    const [formData, setFormData] = useState(initialFormData);
+    const [formErrors, setFormErrors] = useState<IErrorAPI[] | null>(null);
+    
+    const navigate = useNavigate();
+    // console.debug(
+    //     "SignupForm",
+    //     "signup=", typeof signup,
+    //     "formData=", formData,
+    //     "formErrors=", formErrors,
+    // );
+
+  /** Handle form submit:
+   *
+   * Calls login func prop and, if not successful, sets errors.
+   */
+  async function handleSubmit(evt: React.FormEvent) {
+    evt.preventDefault();
+    try {
+      await signup(formData);
+    } catch (errs) {
+        if(errs instanceof Array){
+            setFormErrors(errs);
+        }
+    }
+    navigate("/companies")
+}
+
+  /** Update form data field */
+  function handleChange(evt: React.ChangeEvent<InputElements>) {
+    const { name, value } = evt.target;
+    setFormData(data => ({ ...data, [name]: value }));
+  }
+
+  let errorRenders: JSX.Element[] = [];
+  if(formErrors){
+    errorRenders = formErrors.map((err) => <ErrorCard err={err}/>);
+  }
+
+  return (
+    <div className="SignupForm">
+      <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+        <h2 className="mb-3">Sign Up</h2>
+        <div className="card">
+          <div className="card-body">
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <label className="form-label">Username</label>
+                <input
+                  name="username"
+                  className="form-control"
+                  value={formData.username}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  className="form-control"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label">First name</label>
+                <input
+                  name="firstName"
+                  className="form-control"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Last name</label>
+                <input
+                  name="lastName"
+                  className="form-control"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  className="form-control"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
+
+              {errorRenders}
+
+              <div className="d-grid">
+                <button className="btn btn-primary" onClick={handleSubmit}>
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default SignupForm;
