@@ -36,6 +36,10 @@ interface IJob {
     companyHandle: string
 }
 
+interface IJobs {
+    jobs: IJob[]
+}
+
 /** USER */
 interface IUserUpdate {
     password?: string,
