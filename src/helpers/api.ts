@@ -19,8 +19,11 @@ class JoblyApi {
 
         const url = new URL(`${BASE_URL}/${endpoint}`);
         const headers = {
-            Authorization: `Bearer ${JoblyApi.token}`,
-            "Content-Type": "application/json"
+            authorization: `Bearer ${JoblyApi.token}`,
+            'content-type': 'application/json',
+            'origin': 'http://localhost:5173',
+            'Access-Control-Request-Method': 'PATCH',
+            'Access-Control-Request-Headers': 'Content-Type, Authorization',
         };
 
         //URLSearchParams constructs key val pairs for us, then we make it a
@@ -106,7 +109,7 @@ class JoblyApi {
     /** Save user profile page. */
 
     static async saveProfile(username: string, data: IUserUpdate) {
-        let res = await this.request(`users/${username}`, data, "patch");
+        let res = await this.request(`users/${username}`, data, "PATCH");
         return res.user;
     }
 }

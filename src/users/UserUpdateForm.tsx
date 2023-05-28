@@ -2,7 +2,6 @@ import { useState, useContext } from "react";
 import JoblyApi from "../helpers/api";
 import UserContext from "../auth/UserContext";
 import ErrorCard from "../helpers/Error";
-import "./ProfileForm.css"
 
 // eslint-disable-next-line
 
@@ -33,7 +32,7 @@ function UserUpdateForm() {
 
   //TSNOTE:
   //This function exists entirely to satisfy Typescript since a user can be null
-  //Would a better approach to cast it as a type? Because this route will render
+  //Would a better approach to cast it as a type? Because this components render
   //is controlled by the Router, we in face do *know better* than TS.
   function initializeForm(){
     if(currentUser){
