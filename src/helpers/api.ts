@@ -37,14 +37,13 @@ class JoblyApi {
 
         //fetch API does not throw an error, have to dig into the resp for msgs
         const resp = await fetch(url, { method, body, headers });
-        console.log("fetch resp", resp);
+        // console.log("fetch resp", resp);
 
         if (!resp.ok) {
-            console.log("Error", resp);
+            // console.log("Error", resp);
             console.error("API Error:", resp.statusText, resp.status);
-            //TODO: Add error handling and throw something here.
             const { error } = await resp.json()
-            console.log("errors", error)
+            // console.log("errors", error)
             throw Array.isArray(error) ? error : [error];
         }
 

@@ -41,6 +41,13 @@ interface IJobs {
 }
 
 /** USER */
+interface IUser {
+    username: string,
+    firstName: string,
+    lastName: string,
+    isAdmin: boolean,
+    jobs: IJob[]
+}
 interface IUserUpdate {
     password?: string,
     firstName?: string,
