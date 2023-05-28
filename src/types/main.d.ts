@@ -47,3 +47,10 @@ interface IUserUpdate {
     lastName?: string,
     email?: string
 }
+
+/** ERROR */
+
+interface IErrorAPI {
+    message: string,
+    status: number
+}

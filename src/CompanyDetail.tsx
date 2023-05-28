@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import { useParams } from "react-router-dom";
 import CompanyCard from './CompanyCard';
+import ErrorCard from './Error'
 import JoblyApi from './api';
 import JobsList from './JobsList';
 
@@ -19,19 +20,39 @@ import JobsList from './JobsList';
  */
 function CompanyDetail(){
     const [company, setCompany] = useState<(ICompany & IJobs) | null>(null);
+    const [errors, setErrors] = useState<IErrorAPI[] | null>(null);
 
     const params = useParams();
 
     useEffect(function(){
         async function getCompany(){
+            //Typescript guard
             if(!params.handle) return;
-            const resp = await JoblyApi.getCompany(params.handle);
 
+            let resp;
+
+            try{
+                resp = await JoblyApi.getCompany(params.handle);
+            }
+            catch(errs){
+                if(errs instanceof Array){
+                    setErrors(errs);
+                    return;
+                }                    
+                //if it's not the error we are expecting, throw it for debugging
+                throw errs
+            }
+            
+            //Everything is fine, proceed
             setCompany(resp);
         }
         getCompany();
     }, []);
 
+    if(errors) return (
+        <>
+        {errors.map((err)=>(<ErrorCard err={err} / >))}
+        </>)
     if(!company) return <p>Loading...</p>;
 
     return(
